@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from .forms import BookingForm
 
 # class-based views?? mixins??
 
@@ -29,3 +30,12 @@ def menu(request):
 
 def book(request):
     return HttpResponse('Make a booking')
+
+def form_view(request):
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {"form" : form}
+    return render(request, "booking.html", context)
