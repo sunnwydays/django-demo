@@ -7,4 +7,3 @@ def home(request):
 def handler404(request, exception):
     # return render(request, 'poo.html', status=404)
     return HttpResponse('404 error 📰', status=404)
-
