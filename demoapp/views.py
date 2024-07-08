@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .forms import BookingForm
+from .models import Menu
 
 # class-based views?? mixins??
 
 def home(request):
-    return HttpResponse('<h1> Welcome to Little Lemon! </h1>')
+    return render(request, 'home.html')
 
 def drinks(request, drink_name):
     drink = {
@@ -27,7 +28,9 @@ def about(request):
     return render(request, 'about.html', {'content': about_content})
 
 def menu(request):
-    return render(request, 'menu.html')
+    menu_items = Menu.objects.all()
+    items_dict = {'menu': menu_items}
+    return render(request, 'menu.html', items_dict)
 
 def book(request):
     return HttpResponse('Make a booking')
