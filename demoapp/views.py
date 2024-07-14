@@ -3,10 +3,13 @@ from django.http import HttpResponse, Http404
 from .forms import BookingForm
 from .models import Menu
 
-# class-based views?? mixins??
+from django.views.generic.base import TemplateView 
 
-def home(request):
-    return render(request, 'home.html')
+# mixins??
+
+# class-based views: TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+class IndexView(TemplateView):
+    template_name = 'home.html'
 
 def drinks(request, drink_name):
     drink = {
